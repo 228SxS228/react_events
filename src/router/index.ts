@@ -1,22 +1,22 @@
 import React from "react";
-import Calendar from "../pages/Calendar";
 import Login from "../pages/Login";
+import Calendar from '../pages/Calendar';
 
-export interface IRouter {
-    path:string;
+export interface IRoute {
+    path: string;
     component: React.ComponentType;
     exact?: boolean;
 }
 
-export enum RouteName {
+export enum RouteNames {
     LOGIN = '/login',
     CALENDAR = '/'
 }
 
-export const publicRoutes: IRouter[] = [
-    {path: RouteName.LOGIN, exact: true, component: Login}
+export const publicRoutes: IRoute[] = [
+    {path: RouteNames.LOGIN, exact: true, component: Login}
 ]
 
-export const privateRoutes: IRouter[] = [
-    {path: RouteName.CALENDAR, exact: true, component: Calendar}
+export const privateRoutes: IRoute[] = [
+    {path: RouteNames.CALENDAR, exact: true, component: Calendar}
 ]

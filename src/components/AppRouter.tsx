@@ -1,34 +1,34 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { privateRoutes, publicRoutes, RouteName } from "../router";
+import React from 'react';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import {privateRoutes, publicRoutes, RouteNames} from "../router";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 const AppRouter = () => {
-    const auth = true;
-    return(
-        auth ?
-        <Switch>
-            {privateRoutes.map(route => 
-                <Route
-                    path={route.path}
-                    exact={route.exact}
-                    component={route.component}
-                    key={route.path}
-                />
-            )}
-            <Redirect to={RouteName.CALENDAR}/>
-        </Switch>
-        :
-        <Switch>
-        {publicRoutes.map(route => 
-                <Route
-                    path={route.path}
-                    exact={route.exact}
-                    component={route.component}
-                    key={route.path}
-                />
-            )}
-            <Redirect to={RouteName.LOGIN}/>
-        </Switch>
+    const {isAuth} = useTypedSelector(state => state.auth);
+
+    return (
+        isAuth ?
+            <Switch>
+                {privateRoutes.map(route =>
+                    <Route path={route.path}
+                           exact={route.exact}
+                           component={route.component}
+                           key={route.path}
+                    />
+                )}
+                <Redirect to={RouteNames.CALENDAR}/>
+            </Switch>
+            :
+            <Switch>
+                {publicRoutes.map(route =>
+                    <Route path={route.path}
+                           exact={route.exact}
+                           component={route.component}
+                           key={route.path}
+                    />
+                )}
+                <Redirect to={RouteNames.LOGIN}/>
+            </Switch>
     );
 };
 
